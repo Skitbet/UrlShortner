@@ -14,7 +14,7 @@ async fn redirect(
 
     let collection = db.collection::<Url>("urls");
 
-    match collection.find_one(doc! { "short_code": &short_code }, None).await {
+    match collection.find_one(doc! { "short_code": &short_code }).await {
         Ok(Some(url)) => Ok(HttpResponse::Found()
             .insert_header(("Location", url.original_url))
             .finish()),

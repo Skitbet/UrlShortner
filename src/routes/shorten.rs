@@ -21,7 +21,7 @@ async fn shorten(
     };
 
     let collection = db.collection::<Url>("urls");
-    match collection.insert_one(&url, None).await {
+    match collection.insert_one(&url).await {
         Ok(_) => Ok(web::Json(url)),
         Err(_) => Err(HttpError::InternalError),
     }
