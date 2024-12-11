@@ -1,6 +1,7 @@
 use std::env;
 use actix_web::{web, App, HttpServer};
 use dotenv::dotenv;
+use crate::db::MongoDB;
 use crate::models::state::AppState;
 
 mod db;
@@ -16,10 +17,10 @@ async fn main() -> std::io::Result<()> {
         panic!("No Mongo URI found in environment variables. Please set MONGO_URI.");
     });
 
-    let db = db::get_database(&mongo_uri).await;
+    let database = MongoDB::new(&mongo_uri, "url_shortner").await;
 
     let data = web::Data::new(AppState {
-        database: db,
+        database,
     });
 
     HttpServer::new(move || {

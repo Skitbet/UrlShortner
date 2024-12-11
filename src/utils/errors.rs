@@ -12,6 +12,8 @@ pub enum HttpError {
     Timeout,
     #[display(fmt = "Invalid params")]
     InvalidParams,
+    #[display(fmt = "Not Found")]
+    NotFound,
 }
 
 impl error::ResponseError for HttpError {
@@ -26,6 +28,7 @@ impl error::ResponseError for HttpError {
             HttpError::InternalError => StatusCode::INTERNAL_SERVER_ERROR,
             HttpError::Timeout => StatusCode::REQUEST_TIMEOUT,
             HttpError::InvalidParams => StatusCode::BAD_REQUEST,
+            HttpError::NotFound => StatusCode::NOT_FOUND,
         }
     }
 }
