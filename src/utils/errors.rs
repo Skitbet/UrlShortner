@@ -7,7 +7,7 @@ use derive_more::{Display, Error};
 #[derive(Debug, Display, Error)]
 pub enum HttpError {
     #[display(fmt = "Internal server error")]
-    Unauthenticated,
+    InternalError,
     #[display(fmt = "Timed out")]
     Timeout,
     #[display(fmt = "Invalid params")]
